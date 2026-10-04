@@ -456,14 +456,14 @@
     </div>
   </div>
 
-  <!-- Instructions Modal (Without Negative Marking) -->
+  <!-- Instructions Modal (Updated 6:00 PM Slot & 90 Minutes) -->
   <div id="instructionsScreen" class="modal-backdrop hidden">
     <div class="modal-box" style="max-width: 720px;">
       <div class="modal-blue-header">Instructions & Undertaking / उम्मीदवारों के लिए निर्देश</div>
       <div style="padding: 20px; max-height: 400px; overflow-y:auto; font-size: 0.88rem; line-height: 1.6;">
         <div style="background: #e0f2fe; border-left: 4px solid #0284c7; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px;">
           <strong>Total Duration / कुल अवधि: 90 Minutes (90 मिनट)</strong><br>
-          <span style="font-size: 0.82rem; color: #0369a1;">Post: Commercial Clerk Group - C | Slot: 02:00 PM to 03:30 PM | Maximum Marks: 100</span>
+          <span style="font-size: 0.82rem; color: #0369a1;">Post: Commercial Clerk Group - C | Slot: 06:00 PM to 07:30 PM | Maximum Marks: 100</span>
         </div>
         <h4 style="color:#0284c7; margin-bottom: 8px;">Important Guidelines / महत्वपूर्ण दिशानिर्देश:</h4>
         <ol style="padding-left: 20px;">
@@ -744,7 +744,6 @@
       candData.name = name;
       candData.roll = roll;
 
-      // Update Header with Entered Student Credentials
       document.getElementById("hdrName").innerText = name;
       document.getElementById("hdrRoll").innerText = roll;
       document.getElementById("headerCandidateMeta").classList.remove("hidden");
@@ -917,6 +916,7 @@
       document.getElementById("submitPromptModal").classList.add("hidden");
     }
 
+    // Format Current Date with Dynamic Submit Time from 6:00 PM Slot
     function getExamDateTime() {
       const now = new Date();
       const day = String(now.getDate()).padStart(2, '0');
@@ -924,7 +924,7 @@
       const year = now.getFullYear();
 
       const elapsedSeconds = (90 * 60) - totalSecs;
-      const startSlotMinutes = 14 * 60; // 2:00 PM
+      const startSlotMinutes = 18 * 60; // 6:00 PM (18:00)
       const totalSlotMinutes = startSlotMinutes + Math.floor(elapsedSeconds / 60);
       const slotSeconds = elapsedSeconds % 60;
 
