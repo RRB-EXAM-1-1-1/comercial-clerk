@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RRB NTPC CBT Online Examination Portal</title>
+  <style>
+    :root {
+      --top-blue: #092c4c;
+      --header-bg: #0d3b66;
+      --tab-active: #0d6efd;
+      --tab-bg: #e9ecef;
+      --border-color: #cbd5e1;
+      --text-dark: #1e293b;
+      --green: #22c55e;
+      --orange: #f59e0b;
+      --purple: #8b5cf6;
+      --grey: #f1f5f9;
+      --blue: #3b82f6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: var(--text-dark);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    .top-header {
+      background: var(--top-blue);
+      color: #ffffff;
+      padding: 10px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #0284c7;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+    }
+
+    .brand-info h1 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .brand-info p {
+      font-size: 0.78rem;
+      color: #93c5fd;
+      margin-top: 1px;
+    }
+
+    .brand-info .sub-post {
+      font-size: 0.76rem;
+      color: #fbbf24;
+      font-weight: 600;
+    }
+
+    .candidate-meta {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      font-size: 0.8rem;
+    }
+
+    .cand-details div {
+      margin-bottom: 2px;
+    }
+
+    .timer-wrap {
+      background: #082138;
+      border: 1px solid #1e3a5f;
+      padding: 6px 14px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .timer-clock {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fbbf24;
+      font-family: monospace;
+    }
+
+    .tabs-bar {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      padding: 6px 14px 0 14px;
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+    }
+
+    .section-tab {
+      background: var(--tab-bg);
+      color: #475569;
+      border: 1px solid var(--border-color);
+      border-bottom: none;
+      padding: 7px 16px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border-radius: 4px 4px 0 0;
+      cursor: pointer;
+    }
+
+    .section-tab.active {
+      background: var(--tab-active);
+      color: #ffffff;
+      border-color: var(--tab-active);
+    }
+
+    .exam-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      height: calc(100vh - 130px);
+      position: relative;
+    }
+
+    .question-panel {
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border-right: 1px solid var(--border-color);
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .q-meta-bar {
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+      font-size: 0.85rem;
+    }
+
+    .q-marks-pill {
+      font-size: 0.78rem;
+      color: #475569;
+    }
+
+    .q-content-box {
+      padding: 24px;
+      flex: 1;
+      position: relative;
+    }
+
+    .q-text-en {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .q-text-hi {
+      font-size: 0.98rem;
+      color: #334155;
+      margin-bottom: 22px;
+    }
+
+    .options-box {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 750px;
+    }
+
+    .opt-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #ffffff;
+      transition: all 0.15s;
+    }
+
+    .opt-item:hover {
+      background: #f0f7ff;
+      border-color: #93c5fd;
+    }
+
+    .opt-item input[type="radio"] {
+      width: 17px;
+      height: 17px;
+      cursor: pointer;
+    }
+
+    .q-footer-bar {
+      padding: 10px 18px;
+      background: #f8fafc;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .btn {
+      padding: 7px 15px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-blue {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+    }
+
+    .btn-blue:hover { background: #0369a1; }
+
+    .palette-side {
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow-y: auto;
+    }
+
+    .side-title {
+      padding: 8px 14px;
+      background: #0d3b66;
+      color: #ffffff;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .palette-grid {
+      padding: 12px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      max-height: 230px;
+      overflow-y: auto;
+      border-bottom: 1px solid var(--border-color);
+      background: #ffffff;
+    }
+
+    .p-btn {
+      height: 32px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 4px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .p-btn.current { border: 2px solid #000; background: #e0f2fe; }
+    .p-btn.answered { background: var(--green); color: #fff; border-color: var(--green); }
+    .p-btn.not-answered { background: #fee2e2; color: #991b1b; border-color: #f87171; }
+    .p-btn.review { background: var(--orange); color: #fff; border-color: var(--orange); }
+    .p-btn.review-ans { background: var(--purple); color: #fff; border-color: var(--purple); }
+
+    .legend-box {
+      padding: 8px 12px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4px;
+      font-size: 0.73rem;
+      background: #f1f5f9;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .legend-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      border: 1px solid #94a3b8;
+    }
+
+    .section-counter-list {
+      padding: 8px 12px;
+      flex: 1;
+      font-size: 0.77rem;
+    }
+
+    .sec-counter-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 8px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+    }
+
+    .sec-counter-item.active {
+      background: #dbeafe;
+      border-color: #93c5fd;
+      font-weight: 700;
+      color: #1e40af;
+    }
+
+    .submit-block {
+      padding: 10px;
+      background: #ffffff;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .btn-submit-main {
+      width: 100%;
+      background: #0284c7;
+      color: #fff;
+      padding: 9px;
+      border: none;
+      border-radius: 4px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(15, 23, 42, 0.65);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 15px;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      border-radius: 8px;
+      max-width: 480px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    .modal-blue-header {
+      background: #0284c7;
+      color: #ffffff;
+      padding: 10px 16px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-body-content {
+      padding: 24px;
+      text-align: center;
+    }
+
+    .modal-footer-actions {
+      padding: 12px 18px;
+      background: #f8fafc;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .loader-ring {
+      width: 54px;
+      height: 54px;
+      border: 5px solid #e2e8f0;
+      border-top: 5px solid #0284c7;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 16px auto;
+    }
+
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 850px) {
+      .exam-body { grid-template-columns: 1fr; height: auto; }
+      .palette-side { height: 380px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header Bar -->
+  <header class="top-header">
+    <div class="brand-section">
+      <div class="brand-info">
+        <h1>RAILWAY RECRUITMENT BOARDS (RRB)</h1>
+        <p>Non Technical Popular Categories (NTPC) | Computer Based Test (CBT)</p>
+        <p class="sub-post">Commercial Clerk Group - C</p>
+      </div>
+    </div>
+    <!-- Hidden before student login -->
+    <div class="candidate-meta hidden" id="headerCandidateMeta">
+      <div class="cand-details">
+        <div>Candidate Name: <strong id="hdrName">--</strong></div>
+        <div>Roll Number: <strong id="hdrRoll">--</strong></div>
+        <div>Registration Number: <strong>240098172</strong></div>
+      </div>
+      <div class="timer-wrap">
+        <span style="font-size: 0.72rem; color: #94a3b8;">Time Left</span>
+        <span class="timer-clock" id="timerClock">90:00</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Modal -->
+  <div id="loginScreen" class="modal-backdrop">
+    <div class="modal-box" style="max-width: 440px;">
+      <div class="modal-blue-header">RRB NTPC Candidate Verification</div>
+      <div style="padding: 20px;">
+        <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 14px;">Enter candidate details to start your examination:</p>
+        <div style="margin-bottom: 12px;">
+          <label style="display:block; font-size: 0.8rem; font-weight:600; margin-bottom: 4px;">Candidate Full Name:</label>
+          <input type="text" id="candInputName" style="width:100%; padding:9px; border:1px solid #cbd5e1; border-radius:4px;" placeholder="Enter Candidate Full Name" required>
+        </div>
+        <div style="margin-bottom: 18px;">
+          <label style="display:block; font-size: 0.8rem; font-weight:600; margin-bottom: 4px;">Roll No / Hall Ticket No:</label>
+          <input type="text" id="candInputRoll" style="width:100%; padding:9px; border:1px solid #cbd5e1; border-radius:4px;" placeholder="Enter Roll Number" required>
+        </div>
+        <button class="btn btn-blue" style="width:100%; padding: 10px;" onclick="validateLogin()">Login to Test</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instructions Modal (Without Negative Marking) -->
+  <div id="instructionsScreen" class="modal-backdrop hidden">
+    <div class="modal-box" style="max-width: 720px;">
+      <div class="modal-blue-header">Instructions & Undertaking / उम्मीदवारों के लिए निर्देश</div>
+      <div style="padding: 20px; max-height: 400px; overflow-y:auto; font-size: 0.88rem; line-height: 1.6;">
+        <div style="background: #e0f2fe; border-left: 4px solid #0284c7; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px;">
+          <strong>Total Duration / कुल अवधि: 90 Minutes (90 मिनट)</strong><br>
+          <span style="font-size: 0.82rem; color: #0369a1;">Post: Commercial Clerk Group - C | Slot: 02:00 PM to 03:30 PM | Maximum Marks: 100</span>
+        </div>
+        <h4 style="color:#0284c7; margin-bottom: 8px;">Important Guidelines / महत्वपूर्ण दिशानिर्देश:</h4>
+        <ol style="padding-left: 20px;">
+          <li>Total 100 questions of 1 mark each. Complete exam duration is <strong>90 minutes</strong>.<br><span style="color:#64748b;">कुल 100 प्रश्न हैं, प्रत्येक 1 अंक का है। परीक्षा की कुल अवधि 90 मिनट है।</span></li>
+          <li>There is no negative marking for incorrect answers.<br><span style="color:#64748b;">गलत उत्तरों के लिए कोई नकारात्मक अंकन नहीं है।</span></li>
+          <li>Question paper contains 4 sections: General Awareness, Reasoning Ability, Numerical Ability, and General Science.<br><span style="color:#64748b;">प्रश्न पत्र में 4 खंड हैं: सामान्य जागरूकता, तर्कशक्ति, संख्यात्मक अभियोग्यता और सामान्य विज्ञान।</span></li>
+          <li>Clock will be set at the server. The countdown timer at the top right corner displays the remaining time.<br><span style="color:#64748b;">स्क्रीन के ऊपरी दाएं कोने में 90 मिनट का उल्टी गिनती टाइमर चलेगा। समय समाप्त होने पर पेपर स्वतः जमा हो जाएगा।</span></li>
+          <li>Do not refresh or close the browser window during the test.</li>
+        </ol>
+      </div>
+      <div class="modal-footer-actions">
+        <button class="btn btn-blue" onclick="startTest()">I have read all instructions • Start Exam</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main CBT Workspace -->
+  <main id="examWorkspace" class="hidden">
+    <nav class="tabs-bar">
+      <button class="section-tab active" id="tab_0" onclick="switchSection(0)">Section : General Awareness</button>
+      <button class="section-tab" id="tab_1" onclick="switchSection(1)">Reasoning Ability</button>
+      <button class="section-tab" id="tab_2" onclick="switchSection(2)">Numerical Ability</button>
+      <button class="section-tab" id="tab_3" onclick="switchSection(3)">General Science</button>
+    </nav>
+
+    <div class="exam-body">
+      <section class="question-panel">
+        <div class="q-meta-bar">
+          <div><strong id="displayQNum">Question No. 1 / 100</strong></div>
+          <div class="q-marks-pill">Marks: 1.00 | No Negative Marking</div>
+        </div>
+
+        <div class="q-content-box">
+          <div class="q-text-en" id="qTextEn">Loading Question...</div>
+          <div class="q-text-hi" id="qTextHi">लोड हो रहा है...</div>
+
+          <div class="options-box" id="optionsBox"></div>
+        </div>
+
+        <div class="q-footer-bar">
+          <div style="display: flex; gap: 8px;">
+            <button class="btn" onclick="prevQ()">&lt; Previous</button>
+            <button class="btn" onclick="markReview()">Mark for Review & Next</button>
+            <button class="btn" onclick="clearResp()">Clear Response</button>
+          </div>
+          <div>
+            <button class="btn btn-blue" onclick="saveNext()">Save & Next &gt;</button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="palette-side">
+        <div class="side-title">Question Palette</div>
+        
+        <div class="palette-grid" id="paletteGrid"></div>
+
+        <div class="legend-box">
+          <div class="legend-row"><span class="legend-dot" style="background:var(--green)"></span> Answered</div>
+          <div class="legend-row"><span class="legend-dot" style="background:var(--orange)"></span> Marked for Review</div>
+          <div class="legend-row"><span class="legend-dot" style="background:var(--purple)"></span> Answered & Marked for Review</div>
+          <div class="legend-row"><span class="legend-dot" style="background:#fee2e2"></span> Not Answered</div>
+          <div class="legend-row"><span class="legend-dot" style="background:#e0f2fe"></span> Current Question</div>
+        </div>
+
+        <div class="section-counter-list">
+          <div class="sec-counter-item active" id="secCounter_0">
+            <span>Section : General Awareness</span>
+            <span id="secCountVal_0">0 / 40</span>
+          </div>
+          <div class="sec-counter-item" id="secCounter_1">
+            <span>Section : Reasoning Ability</span>
+            <span id="secCountVal_1">0 / 30</span>
+          </div>
+          <div class="sec-counter-item" id="secCounter_2">
+            <span>Section : Numerical Ability</span>
+            <span id="secCountVal_2">0 / 20</span>
+          </div>
+          <div class="sec-counter-item" id="secCounter_3">
+            <span>Section : General Science</span>
+            <span id="secCountVal_3">0 / 10</span>
+          </div>
+        </div>
+
+        <div class="submit-block">
+          <button class="btn-submit-main" onclick="openSubmitModal()">Submit Test</button>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Submit Prompt Modal -->
+  <div id="submitPromptModal" class="modal-backdrop hidden">
+    <div class="modal-box">
+      <div class="modal-blue-header">
+        <span>Submit Test</span>
+        <span style="cursor:pointer;" onclick="closeSubmitModal()">&times;</span>
+      </div>
+      <div class="modal-body-content">
+        <div style="width: 52px; height: 52px; border-radius: 50%; background: #0284c7; color:#fff; font-size: 2rem; display: flex; align-items:center; justify-content:center; margin: 0 auto 12px auto;">?</div>
+        <h3 style="color:#0f172a; margin-bottom: 8px;">Are you sure you want to submit the test?</h3>
+        <p style="color:#64748b; font-size: 0.88rem;">You will not be able to change your answers after submitting the test.</p>
+      </div>
+      <div class="modal-footer-actions">
+        <button class="btn" onclick="closeSubmitModal()">Cancel</button>
+        <button class="btn btn-blue" onclick="processFinalSubmission()">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submitting In-Progress Loader Modal -->
+  <div id="submittingLoaderModal" class="modal-backdrop hidden">
+    <div class="modal-box" style="text-align: center; padding: 36px 20px;">
+      <div class="loader-ring"></div>
+      <h3 style="color:#0f172a; margin-bottom: 6px;">Your test is being submitted...</h3>
+      <p style="color:#64748b; font-size: 0.85rem;">Please wait, do not close this window.</p>
+    </div>
+  </div>
+
+  <!-- Final Submitted Successfully Screen -->
+  <div id="finalSuccessModal" class="modal-backdrop hidden">
+    <div class="modal-box" style="max-width: 560px;">
+      <div class="modal-body-content" style="text-align: left; padding: 30px;">
+        <div style="text-align: center; margin-bottom: 20px;">
+          <div style="width: 56px; height: 56px; border-radius: 50%; background: #22c55e; color:#fff; font-size: 2.2rem; display: flex; align-items:center; justify-content:center; margin: 0 auto 10px auto;">&#10004;</div>
+          <h2 style="color:#1e293b; font-size: 1.4rem;">Test Submitted Successfully!</h2>
+          <p style="color:#64748b; font-size: 0.88rem; margin-top: 4px;">Thank you for appearing in the RRB NTPC CBT.<br>Your test has been submitted successfully.</p>
+        </div>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 16px; font-size: 0.88rem; line-height: 1.8;">
+          <div style="display:flex; justify-content:space-between;"><span>Exam Name</span><span>: <strong>RRB NTPC (Commercial Clerk Group - C)</strong></span></div>
+          <div style="display:flex; justify-content:space-between;"><span>Candidate Name</span><span>: <strong id="resName">--</strong></span></div>
+          <div style="display:flex; justify-content:space-between;"><span>Roll Number</span><span>: <strong id="resRoll">--</strong></span></div>
+          <div style="display:flex; justify-content:space-between;"><span>Registration Number</span><span>: <strong>240098172</strong></span></div>
+          <div style="display:flex; justify-content:space-between;"><span>Date & Time</span><span>: <strong id="resDateTime">--</strong></span></div>
+          <div style="display:flex; justify-content:space-between;"><span>Total Attempted</span><span>: <strong id="resAttempted">--</strong> / 100</span></div>
+        </div>
+
+        <div style="text-align: center; margin-top: 24px;">
+          <button class="btn btn-blue" style="padding: 10px 42px;" onclick="window.location.reload()">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      { id: 1, sec: 0, en: "The Indus valley people venerated the", hi: "सिंधु घाटी के लोगों ने किसकी वंदना की?", opts: ["Cow / गाय", "Bull / बैल", "Garuda / गरुड़", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 2, sec: 0, en: "The paintings of Ajanta depict stories of the", hi: "अजंता के चित्र किसकी कहानियों को दर्शाते हैं?", opts: ["Jatakas / जातक", "Mahabharata / महाभारत", "Ramayana / रामायण", "None of the above / उपरोक्त में से कोई नहीं"], ans: "A" },
+      { id: 3, sec: 0, en: "Who was the author of Gita Govinda?", hi: "गीत गोविंद के लेखक कौन थे?", opts: ["Vidyapati / विद्यापति", "Surdas / सूरदास", "Jayadeva / जयदेव", "None of the above / उपरोक्त में से कोई नहीं"], ans: "C" },
+      { id: 4, sec: 0, en: "Buddhist Literature was written in", hi: "बौद्ध साहित्य किस भाषा में लिखा गया था?", opts: ["Prakrit / प्राकृत", "Pali / पाली", "Sanskrit / संस्कृत", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 5, sec: 0, en: "Which of the following rivers is known as the 'Sorrow of Bihar'?", hi: "निम्नलिखित में से किस नदी को 'बिहार का शोक' कहा जाता है?", opts: ["Ganga / गंगा", "Kosi / कोसी", "Yamuna / यमुना", "Narmada / नर्मदा"], ans: "B" },
+      { id: 6, sec: 0, en: "Who was the author of Gita Rahasya?", hi: "गीता रहस्य के लेखक कौन थे?", opts: ["Ramakrishna Paramhansa / रामकृष्ण परमहंस", "C Vijayaraghavachariar / सी. विजयराघवाचार्य", "Bal Gangadhar Tilak / बाल गंगाधर तिलक", "None of the above / उपरोक्त में से कोई नहीं"], ans: "C" },
+      { id: 7, sec: 0, en: "The first newspaper in India was the", hi: "भारत में पहला समाचार पत्र कौन सा था?", opts: ["Sambad Kaumudi / संवाद कौमुदी", "Bengal Gazette / बंगाल गजट", "Mirat-ul-Akbar / मिरात-उल-अखबार", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 8, sec: 0, en: "The theory of classical music is discussed in:", hi: "शास्त्रीय संगीत के सिद्धांत पर किस वेद में चर्चा की गई है?", opts: ["Rig Veda / ऋग्वेद", "Atharva Veda / अथर्ववेद", "Yajur Veda / यजुर्वेद", "Sam Veda (None of the above) / सामवेद"], ans: "D" },
+      { id: 9, sec: 0, en: "Brahmo Samaj was established by", hi: "ब्रह्म समाज की स्थापना किसके द्वारा की गई थी?", opts: ["Keshab Sen / केशव चंद्र सेन", "Debendranath Tagore / देवेन्द्रनाथ टैगोर", "Raja Ram Mohan Roy / राजा राम मोहन राय", "None of the above / उपरोक्त में से कोई नहीं"], ans: "C" },
+      { id: 10, sec: 0, en: "Who was the Chairman of the Drafting Committee of the Constitution?", hi: "संविधान की प्रारूप समिति के अध्यक्ष कौन थे?", opts: ["J.B. Kriplani / जे.बी. कृपलानी", "Rajendra Prasad / राजेंद्र प्रसाद", "J.L. Nehru / जे.एल. नेहरू", "Dr. B.R. Ambedkar (None of the above) / डॉ. बी.आर. अंबेडकर"], ans: "D" },
+      { id: 11, sec: 0, en: "The Family Court decides disputes relating to", hi: "परिवार न्यायालय किससे संबंधित विवादों का निर्णय करता है?", opts: ["Marriage affairs / विवाह संबंधी मामले", "Domestic violence / घरेलू हिंसा", "Property matters / संपत्ति के मामले", "None of the above / उपरोक्त में से कोई नहीं"], ans: "A" },
+      { id: 12, sec: 0, en: "Atmospheric pressure is measured with", hi: "वायुमंडलीय दबाव किसके द्वारा मापा जाता है?", opts: ["Hydrometer / हाइड्रोमीटर", "Barometer / बैरोमीटर", "Hygrometer / हाइग्रोमीटर", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 13, sec: 0, en: "Sound travels at maximum speed in", hi: "ध्वनि अधिकतम गति से किसमें यात्रा करती है?", opts: ["Vacuum / निर्वात", "Air / वायु", "Steel / स्टील", "None of the above / उपरोक्त में से कोई नहीं"], ans: "C" },
+      { id: 14, sec: 0, en: "'IC Chips' for computers are usually made of", hi: "कंप्यूटर की 'IC चिप्स' आमतौर पर किसकी बनी होती हैं?", opts: ["Lead / सीसा", "Silicon / सिलिकॉन", "Chromium / क्रोमियम", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 15, sec: 0, en: "The Sun is a", hi: "सूर्य एक क्या है?", opts: ["Planet / ग्रह", "Comet / धूमकेतु", "Star / तारा", "None of the above / उपरोक्त में से कोई नहीं"], ans: "C" },
+      { id: 16, sec: 0, en: "Which lubricant is used in heavy machines?", hi: "भारी मशीनों में स्नेहक के रूप में क्या उपयोग किया जाता है?", opts: ["Bauxite / बॉक्साइट", "Sulphur / सल्फर", "Phosphorus / फास्फोरस", "Graphite (None of the above) / ग्रेफाइट"], ans: "D" },
+      { id: 17, sec: 0, en: "Which amongst the following is not a fundamental quantity?", hi: "निम्नलिखित में से कौन मौलिक भौतिक राशि नहीं है?", opts: ["Velocity / वेग", "Length / लंबाई", "Mass / द्रव्यमान", "None of the above / उपरोक्त में से कोई नहीं"], ans: "A" },
+      { id: 18, sec: 0, en: "1 byte is equal to", hi: "1 बाइट किसके बराबर होता है?", opts: ["2 bits / 2 बिट्स", "8 bits / 8 बिट्स", "16 bits / 16 बिट्स", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 19, sec: 0, en: "Which sanctuary in Kerala is known for elephants?", hi: "केरल का कौन सा अभयारण्य हाथियों के लिए जाना जाता है?", opts: ["Parakal / पराकल", "Periyar / पेरियार", "Chandraprabha / चंद्रप्रभा", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 20, sec: 0, en: "National Aquatic Animal of India is", hi: "भारत का राष्ट्रीय जलीय जीव कौन सा है?", opts: ["Ridley's Turtle / रिडले कछुआ", "Blue Whale / ब्लू व्हेल", "Ghariyal / घड़ियाल", "Gangetic Dolphin (None of the above) / गंगा डॉल्फिन"], ans: "D" },
+      { id: 21, sec: 0, en: "Anandamath was written by", hi: "आनंदमठ किसके द्वारा लिखा गया था?", opts: ["Bankim Chandra Chattopadhyay / बंकिम चंद्र चट्टोपाध्याय", "Jawaharlal Nehru / जवाहरलाल नेहरू", "Mahatma Gandhi / महात्मा गांधी", "None of the above / उपरोक्त में से कोई नहीं"], ans: "A" },
+      { id: 22, sec: 0, en: "Who wrote 'Andher Nagari Chaupat Raja'?", hi: "'अंधेर नगरी चौपट राजा' किसने लिखा था?", opts: ["Govardhanram Tripathi / गोवर्धनराम त्रिपाठी", "Munshi Premchand / मुंशी प्रेमचंद", "Fakir Mohan Senapati / फकीर मोहन सेनापति", "Bharatendu Harishchandra (None of the above) / भारतेन्दु हरिश्चंद्र"], ans: "D" },
+      { id: 23, sec: 0, en: "'Do or Die' slogan was given by", hi: "'करो या मरो' का नारा किसने दिया था?", opts: ["J.L. Nehru / जे.एल. नेहरू", "M.K. Gandhi / एम.के. गांधी", "B.G. Tilak / बी.जी. तिलक", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 24, sec: 0, en: "Unit of measurement of distances of stars from earth is", hi: "तारों की दूरी मापने की इकाई क्या है?", opts: ["Light year / प्रकाश वर्ष", "Fathoms / फ़ैदम", "Nautical miles / समुद्री मील", "None of the above / उपरोक्त में से कोई नहीं"], ans: "A" },
+      { id: 25, sec: 0, en: "Which comet appears every 76 years?", hi: "कौन सा धूमकेतु प्रत्येक 76 वर्ष में दिखाई देता है?", opts: ["Holmes / होम्स", "Halley's / हैली", "Donati's / डोनाटी", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 26, sec: 0, en: "Which instrument is used to record Earthquakes?", hi: "भूकंप मापने के लिए किस उपकरण का उपयोग किया जाता है?", opts: ["Anemometer / एनीमोमीटर", "Seismograph / सीस्मोग्राफ", "Psychrometer / साइक्रोमीटर", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 27, sec: 0, en: "Eskimos are indigenous inhabitants of", hi: "एस्किमो कहाँ के मूल निवासी हैं?", opts: ["India / भारत", "Africa / अफ्रीका", "West Indies / वेस्ट इंडीज", "Arctic Region (None of the above) / आर्कटिक क्षेत्र"], ans: "D" },
+      { id: 28, sec: 0, en: "Where is the Maikal Range located?", hi: "मैकल पर्वत श्रृंखला कहाँ स्थित है?", opts: ["Rajasthan / राजस्थान", "Jammu & Kashmir / जम्मू और कश्मीर", "Chhattisgarh / छत्तीसगढ़", "None of the above / उपरोक्त में से कोई नहीं"], ans: "C" },
+      { id: 29, sec: 0, en: "Which river flows between the Satpuras and Vindhyas?", hi: "सतपुड़ा और विंध्य के बीच कौन सी नदी बहती है?", opts: ["Godavari / गोदावरी", "Gandak / गंडक", "Tapti / ताप्ती", "Narmada (None of the above) / नर्मदा"], ans: "D" },
+      { id: 30, sec: 0, en: "Which National Park is known as the home of Asiatic Lions?", hi: "एशियाई शेर के लिए कौन सा राष्ट्रीय उद्यान जाना जाता है?", opts: ["Gir National Park / गिर राष्ट्रीय उद्यान", "Dudhwa National Park / दुधवा राष्ट्रीय उद्यान", "Kanha National Park / कान्हा राष्ट्रीय उद्यान", "None of the above / उपरोक्त में से कोई नहीं"], ans: "A" },
+      { id: 31, sec: 0, en: "Place value of 7 in 9872590 is", hi: "संख्या 9872590 में 7 का स्थानीय मान क्या है?", opts: ["72590", "70", "70000", "None of the above / उपरोक्त में से कोई नहीं"], ans: "C" },
+      { id: 32, sec: 0, en: "A place where gambling is practiced is called a", hi: "जहाँ जुआ खेला जाता है उस स्थान को क्या कहते हैं?", opts: ["Hotel / होटल", "Casino / कैसीनो", "Restaurant / रेस्तरां", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 33, sec: 0, en: "One who believes in the existence of God is a", hi: "जो ईश्वर के अस्तित्व में विश्वास करता है उसे क्या कहते हैं?", opts: ["Atheist / नास्तिक", "Theist / आस्तिक", "Moralist / नीतिवादी", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 34, sec: 0, en: "A place where government coins are manufactured is a", hi: "सिक्के ढालने के स्थान को क्या कहा जाता है?", opts: ["Mint / टकसाल", "Press / प्रेस", "Treasury / खजाना", "None of the above / उपरोक्त में से कोई नहीं"], ans: "A" },
+      { id: 35, sec: 0, en: "A geometric figure with more than four angles or sides is a", hi: "चार से अधिक भुजाओं वाली ज्यामितीय आकृति को क्या कहते हैं?", opts: ["Parallelogram / समानांतर चतुर्भुज", "Octagon / अष्टकोण", "Polygon / बहुभुज", "None of the above / उपरोक्त में से कोई नहीं"], ans: "C" },
+      { id: 36, sec: 0, en: "A person appointed to speak on behalf of others is a", hi: "दूसरों की ओर से बोलने के लिए नियुक्त व्यक्ति को क्या कहा जाता है?", opts: ["Reporter / संवाददाता", "Spokesman / प्रवक्ता", "Foreigner / विदेशी", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 37, sec: 0, en: "Largest producer of Coffee in India is", hi: "भारत में कॉफी का सबसे बड़ा उत्पादक राज्य कौन सा है?", opts: ["Odisha / ओडिशा", "Kerala / केरल", "Karnataka / कर्नाटक", "None of the above / उपरोक्त में से कोई नहीं"], ans: "C" },
+      { id: 38, sec: 0, en: "The adult human skeleton consists of", hi: "वयस्क मानव शरीर में कुल कितनी हड्डियाँ होती हैं?", opts: ["200 Bones / 200 हड्डियां", "206 Bones / 206 हड्डियां", "210 Bones / 210 हड्डियां", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 39, sec: 0, en: "Universal recipient blood group is", hi: "सर्वग्राही रक्त समूह कौन सा है?", opts: ["A", "AB", "O", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 40, sec: 0, en: "Yakshagana is a folk-dance drama of", hi: "यक्षगान किस राज्य का लोक नृत्य नाटक है?", opts: ["Karnataka / कर्नाटक", "Maharashtra / महाराष्ट्र", "Gujarat / गुजरात", "None of the above / उपरोक्त में से कोई नहीं"], ans: "A" },
+
+      // Reasoning Ability (Q. 41 - 70)
+      { id: 41, sec: 1, en: "Cobra is related to Snake as Leopard is related to:", hi: "कोबरा का संबंध सांप से है तो तेंदुए का संबंध किससे है?", opts: ["Mouse / चूहा", "Bird / पक्षी", "Cat / बिल्ली", "None of the above / उपरोक्त में से कोई नहीं"], ans: "C" },
+      { id: 42, sec: 1, en: "Circle is related to Circumference as Square is related to:", hi: "वृत्त का संबंध परिधि से है तो वर्ग का संबंध किससे है?", opts: ["Area / क्षेत्रफल", "Volume / आयतन", "Diagonal / विकर्ण", "Perimeter (None of the above) / परिमाप"], ans: "D" },
+      { id: 43, sec: 1, en: "Complete the series: 0, 3, 8, 15, 24, 35, 48, ?", hi: "श्रृंखला पूर्ण करें: 0, 3, 8, 15, 24, 35, 48, ?", opts: ["53", "63", "80", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 44, sec: 1, en: "Complete the series: 256, 64, 16, 4, ?", hi: "श्रृंखला पूर्ण करें: 256, 64, 16, 4, ?", opts: ["1", "1/4", "1/16", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
+      { id: 45, sec: 1, en: "Find the odd one out:", hi: "विषम विकल्प चुनें:", opts: ["Guinea Worm / गिनी कृमि", "Hook Worm / हुकवर्म", "Ring Worm / दाद (रिंगवर्म)", "Tapeworm / फीताकृमि"], ans: "C" },
+      { id: 46, sec: 1, en: "If TRAIN is coded as WUDLQ, then BUS will be coded as:", hi: "यदि TRAIN = WUDLQ लिखा जाता है, तो BUS = ?", opts: ["EXV", "EYV", "DWU", "None of the above / उपरोक्त में से कोई नहीं"], ans: "A" },
+      { id: 47, sec: 1, en: "Pointing to a man, a woman said 'His mother is the only daughter of my mother'. How is the woman related to the man?", hi: "एक पुरुष की ओर इशारा करते हुए एक महिला ने कहा 'उसकी माँ मेरी माँ की इकलौती बेटी है।' वह महिला उस पुरुष से कैसे संबंधित है?", opts: ["Sister / बहन", "Mother / माँ", "Aunt / चाची/मौसी", "Grandmother / दादी"], ans: "B" },
+      { id: 48, sec: 1, en: "If '+' means multiply, '-' means divide, then: 12 - 3 + 2 = ?", hi: "यदि '-' का अर्थ भाग और '+' का अर्थ गुणा है, तो 12 - 3 + 2 = ?", opts: ["6", "8", "10", "4"], ans: "B" },
+      { id: 49, sec: 1, en: "Moon : Satellite :: Earth : ?", hi: "चंद्रमा : उपग्रह :: पृथ्वी : ?", opts: ["Sun / सूर्य", "Planet / ग्रह", "Solar System / सौरमंडल", "Asteroid / क्षुद्रग्रह"], ans: "B" },
+      { id: 50, sec: 1, en: "Find the next alphabet: B, D, G, K, P, ?", hi: "श्रृंखला में अगला अक्षर ज्ञात करें: B, D, G, K, P, ?", opts: ["S", "T", "V", "W"], ans: "C" },
+      { id: 51, sec: 1, en: "Doctor : Stethoscope :: Sculptor : ?", hi: "डॉक्टर : स्टेथोस्कोप :: मूर्तिकार : ?", opts: ["Chisel / छेनी", "Pen / कलम", "Axe / कुल्हाड़ी", "Sword / तलवार"], ans: "A" },
+      { id: 52, sec: 1, en: "Which word cannot be formed from 'RECOMMENDATION'?", hi: "'RECOMMENDATION' शब्द के अक्षरों से कौन सा शब्द नहीं बनाया जा सकता?", opts: ["MEDIC", "ACTION", "REMIND", "NATION"], ans: "C" },
+      { id: 53, sec: 1, en: "In a row of 30 boys, Rahul is 12th from the left. What is his position from the right?", hi: "30 लड़कों की पंक्ति में राहुल बाएं से 12वें स्थान पर है। दाएं से उसका स्थान क्या होगा?", opts: ["18th / 18वाँ", "19th / 19वाँ", "20th / 20वाँ", "17th / 17वाँ"], ans: "B" },
+      { id: 54, sec: 1, en: "If RED is coded as 27, then BLUE is coded as:", hi: "यदि RED = 27 है, तो BLUE = ?", opts: ["40", "42", "45", "38"], ans: "A" },
+      { id: 55, sec: 1, en: "Day after tomorrow is Sunday. What was day before yesterday?", hi: "यदि परसों रविवार है, तो बीता हुआ परसों कौन सा दिन था?", opts: ["Tuesday / मंगलवार", "Wednesday / बुधवार", "Thursday / गुरुवार", "Friday / शुक्रवार"], ans: "A" },
+      { id: 56, sec: 1, en: "Book : Author :: Statue : ?", hi: "पुस्तक : लेखक :: मूर्ति : ?", opts: ["Painter / चित्रकार", "Sculptor / मूर्तिकार", "Mason / राजमिस्त्री", "Architect / वास्तुकार"], ans: "B" },
+      { id: 57, sec: 1, en: "Choose the odd number: 17, 23, 29, 33, 37", hi: "विषम संख्या चुनें: 17, 23, 29, 33, 37", opts: ["17", "29", "33", "37"], ans: "C" },
+      { id: 58, sec: 1, en: "A man walks 5 km North, turns right and walks 3 km. Which direction is he facing?", hi: "एक व्यक्ति 5 किमी उत्तर की ओर चलता है, फिर दाएं मुड़कर 3 किमी चलता है। उसका मुख किस दिशा में है?", opts: ["North / उत्तर", "East / पूर्व", "West / पश्चिम", "South / दक्षिण"], ans: "B" },
+      { id: 59, sec: 1, en: "Cup : Coffee :: Bowl : ?", hi: "कप : कॉफी :: कटोरा : ?", opts: ["Soup / सूप", "Tea / चाय", "Water / पानी", "Rice / चावल"], ans: "A" },
+      { id: 60, sec: 1, en: "Arrange logically: 1. Seed 2. Plant 3. Fruit 4. Tree", hi: "तार्किक क्रम में व्यवस्थित करें: 1. बीज 2. पौधा 3. फल 4. पेड़", opts: ["1, 2, 4, 3", "1, 2, 3, 4", "2, 1, 4, 3", "4, 1, 2, 3"], ans: "A" },
+      { id: 61, sec: 1, en: "If CLOCK is coded as KCOLC, then WATCH is coded as:", hi: "यदि CLOCK को KCOLC लिखा जाता है, तो WATCH को क्या लिखा जाएगा?", opts: ["HCTAW", "HCTWA", "HWCTA", "None of these / इनमें से कोई नहीं"], ans: "A" },
+      { id: 62, sec: 1, en: "Find missing number: 2, 6, 12, 20, 30, ?", hi: "लुप्त संख्या ज्ञात करें: 2, 6, 12, 20, 30, ?", opts: ["40", "42", "44", "46"], ans: "B" },
+      { id: 63, sec: 1, en: "Choose the odd pair:", hi: "विषम युग्म चुनें:", opts: ["Gold : Metal / सोना : धातु", "Iron : Metal / लोहा : धातु", "Oxygen : Gas / ऑक्सीजन : गैस", "Plastic : Metal / प्लास्टिक : धातु"], ans: "D" },
+      { id: 64, sec: 1, en: "P is Q's brother. R is Q's mother. How is R related to P?", hi: "P, Q का भाई है। R, Q की माँ है। R का P से क्या संबंध है?", opts: ["Mother / माँ", "Aunt / चाची/मौसी", "Sister / बहन", "Daughter / बेटी"], ans: "A" },
+      { id: 65, sec: 1, en: "Number of triangles in a square with both diagonals drawn is:", hi: "दोनों विकर्ण खींचे जाने पर एक वर्ग में कुल कितने त्रिभुज बनते हैं?", opts: ["4", "6", "8", "10"], ans: "C" },
+      { id: 66, sec: 1, en: "Needle : Thread :: Pen : ?", hi: "सुई : धागा :: पेन : ?", opts: ["Ink / स्याही", "Paper / कागज", "Pencil / पेंसिल", "Book / किताब"], ans: "A" },
+      { id: 67, sec: 1, en: "If WATER is called FOOD, FOOD is called TREE, TREE is called SKY, what grows on a branch?", hi: "शाखा पर क्या उगता है?", opts: ["FOOD / भोजन", "TREE / पेड़", "SKY / आकाश", "WATER / जल"], ans: "C" },
+      { id: 68, sec: 1, en: "Complete: AZ, BY, CX, DW, ?", hi: "श्रृंखला पूर्ण करें: AZ, BY, CX, DW, ?", opts: ["EV", "FU", "GT", "HS"], ans: "A" },
+      { id: 69, sec: 1, en: "Find the odd word:", hi: "विषम शब्द ज्ञात करें:", opts: ["Square / वर्ग", "Rectangle / आयत", "Triangle / त्रिभुज", "Cube / घन"], ans: "D" },
+      { id: 70, sec: 1, en: "How many hours are there in 3 days?", hi: "3 दिनों में कितने घंटे होते हैं?", opts: ["48", "60", "72", "84"], ans: "C" },
+
+      // Numerical Ability (Q. 71 - 90)
+      { id: 71, sec: 2, en: "Find area of a triangle with base 15 cm and altitude 20 cm:", hi: "15 सेमी आधार और 20 सेमी ऊंचाई वाले त्रिभुज का क्षेत्रफल ज्ञात करें:", opts: ["200 cm²", "100 cm²", "150 cm²", "300 cm²"], ans: "C" },
+      { id: 72, sec: 2, en: "If 15 men complete a work in 20 days, in how many days can 10 men complete it?", hi: "यदि 15 पुरुष किसी कार्य को 20 दिनों में पूरा करते हैं, तो 10 पुरुष इसे कितने दिनों में पूरा करेंगे?", opts: ["25", "30", "35", "40"], ans: "B" },
+      { id: 73, sec: 2, en: "Find the simple interest on ₹5000 at 10% per annum for 2 years:", hi: "₹5000 पर 10% वार्षिक दर से 2 वर्ष का साधारण ब्याज कितना होगा?", opts: ["₹500", "₹1000", "₹1200", "₹1500"], ans: "B" },
+      { id: 74, sec: 2, en: "A train running at 72 km/h crosses a pole in 10 sec. Find length of train:", hi: "72 किमी/घंटा की गति से चल रही एक ट्रेन 10 सेकंड में एक खंभे को पार करती है। ट्रेन की लंबाई ज्ञात करें:", opts: ["150 m / 150 मी", "200 m / 200 मी", "250 m / 250 मी", "300 m / 300 मी"], ans: "B" },
+      { id: 75, sec: 2, en: "Average of 10, 20, 30, 40, 50 is:", hi: "10, 20, 30, 40, 50 का औसत क्या है?", opts: ["25", "30", "35", "40"], ans: "B" },
+      { id: 76, sec: 2, en: "Find the HCF of 24 and 36:", hi: "24 और 36 का महत्तम समापवर्तक (HCF) ज्ञात करें:", opts: ["6", "12", "18", "24"], ans: "B" },
+      { id: 77, sec: 2, en: "A shopkeeper sells an article for ₹550 at 10% profit. What was cost price?", hi: "एक दुकानदार किसी वस्तु को 10% लाभ पर ₹550 में बेचता है। क्रय मूल्य क्या था?", opts: ["₹480", "₹500", "₹510", "₹520"], ans: "B" },
+      { id: 78, sec: 2, en: "What is 25% of 400?", hi: "400 का 25% कितना होगा?", opts: ["80", "90", "100", "110"], ans: "C" },
+      { id: 79, sec: 2, en: "Solve: (12 × 12) + (5 × 5) = ?", hi: "हल करें: 144 + 25 = ?", opts: ["169", "175", "180", "196"], ans: "A" },
+      { id: 80, sec: 2, en: "Ratio of boys to girls is 3:2. If there are 30 boys, how many girls are there?", hi: "लड़कों और लड़कियों का अनुपात 3:2 है। यदि 30 लड़के हैं, तो लड़कियाँ कितनी हैं?", opts: ["15", "20", "25", "30"], ans: "B" },
+      { id: 81, sec: 2, en: "Square root of 1024 is:", hi: "1024 का वर्गमूल क्या है?", opts: ["28", "32", "34", "36"], ans: "B" },
+      { id: 82, sec: 2, en: "If perimeter of a square is 48 cm, its area is:", hi: "यदि एक वर्ग का परिमाप 48 सेमी है, तो इसका क्षेत्रफल कितना होगा?", opts: ["120 cm²", "144 cm²", "160 cm²", "196 cm²"], ans: "B" },
+      { id: 83, sec: 2, en: "Value of (3/4 + 1/2) is:", hi: "3/4 + 1/2 का मान क्या होगा?", opts: ["1", "5/4", "3/2", "7/4"], ans: "B" },
+      { id: 84, sec: 2, en: "Sum of interior angles of a quadrilateral is:", hi: "एक चतुर्भुज के आंतरिक कोणों का योग कितना होता है?", opts: ["180°", "270°", "360°", "540°"], ans: "C" },
+      { id: 85, sec: 2, en: "If a car travels 150 km in 3 hours, its speed is:", hi: "यदि कोई कार 3 घंटे में 150 किमी की दूरी तय करती है, तो उसकी गति क्या है?", opts: ["45 km/h", "50 km/h", "55 km/h", "60 km/h"], ans: "B" },
+      { id: 86, sec: 2, en: "Convert 0.75 into a fraction:", hi: "0.75 को भिन्न में बदलें:", opts: ["1/2", "2/3", "3/4", "4/5"], ans: "C" },
+      { id: 87, sec: 2, en: "LCM of 12, 15, 20 is:", hi: "12, 15, 20 का लघुत्तम समापवर्त्य (LCM) क्या है?", opts: ["30", "60", "90", "120"], ans: "B" },
+      { id: 88, sec: 2, en: "If x + 5 = 12, then 2x = ?", hi: "यदि x + 5 = 12 है, तो 2x = ?", opts: ["10", "14", "16", "18"], ans: "B" },
+      { id: 89, sec: 2, en: "Discount of 20% on ₹1200 gives selling price of:", hi: "₹1200 पर 20% की छूट देने पर विक्रय मूल्य क्या होगा?", opts: ["₹960", "₹980", "₹1000", "₹1020"], ans: "A" },
+      { id: 90, sec: 2, en: "Cube of 7 is:", hi: "7 का घन क्या है?", opts: ["323", "343", "363", "383"], ans: "B" },
+
+      // General Science (Q. 91 - 100)
+      { id: 91, sec: 3, en: "What is the chemical formula of Common Salt?", hi: "साधारण नमक का रासायनिक सूत्र क्या है?", opts: ["NaCl", "KCl", "NaOH", "HCl"], ans: "A" },
+      { id: 92, sec: 3, en: "Which gas is used in extinguishing fires?", hi: "आग बुझाने के लिए किस गैस का उपयोग किया जाता है?", opts: ["Oxygen / ऑक्सीजन", "Carbon Dioxide / कार्बन डाइऑक्साइड", "Nitrogen / नाइट्रोजन", "Hydrogen / हाइड्रोजन"], ans: "B" },
+      { id: 93, sec: 3, en: "Normal human body temperature is approximately:", hi: "मानव शरीर का सामान्य तापमान लगभग कितना होता है?", opts: ["35°C", "37°C", "39°C", "40°C"], ans: "B" },
+      { id: 94, sec: 3, en: "Which vitamin deficiency causes Scurvy?", hi: "किस विटामिन की कमी से स्कर्वी रोग होता है?", opts: ["Vitamin A / विटामिन A", "Vitamin B / विटामिन B", "Vitamin C / विटामिन C", "Vitamin D / विटामिन D"], ans: "C" },
+      { id: 95, sec: 3, en: "Powerhouse of the cell is known as:", hi: "कोशिका का पावरहाउस (ऊर्जा घर) किसे कहा जाता है?", opts: ["Ribosome / राइबोसोम", "Mitochondria / माइटोकॉन्ड्रिया", "Nucleus / केंद्रक", "Cytoplasm / कोशिकाद्रव्य"], ans: "B" },
+      { id: 96, sec: 3, en: "What is the SI unit of Electric Current?", hi: "विद्युत धारा का SI मात्रक क्या है?", opts: ["Volt / वोल्ट", "Ampere / एम्पीयर", "Ohm / ओम", "Watt / वाट"], ans: "B" },
+      { id: 97, sec: 3, en: "Which mirror is used as a rear-view mirror in vehicles?", hi: "वाहनों में पीछे का दृश्य देखने के लिए किस दर्पण का उपयोग किया जाता है?", opts: ["Concave / अवतल दर्पण", "Convex / उत्तल दर्पण", "Plane / समतल दर्पण", "Cylindrical / बेलनाकार दर्पण"], ans: "B" },
+      { id: 98, sec: 3, en: "Plants make their food by which process?", hi: "पौधे किस प्रक्रिया द्वारा अपना भोजन बनाते हैं?", opts: ["Respiration / श्वसन", "Photosynthesis / प्रकाश संश्लेषण", "Transpiration / वाष्पोत्सर्जन", "Fermentation / किण्वन"], ans: "B" },
+      { id: 99, sec: 3, en: "Which planet is known as the 'Red Planet'?", hi: "किस ग्रह को 'लाल ग्रह' कहा जाता है?", opts: ["Venus / शुक्र", "Mars / मंगल", "Jupiter / बृहस्पति", "Saturn / शनि"], ans: "B" },
+      { id: 100, sec: 3, en: "Water reaches its maximum density at:", hi: "जल का अधिकतम घनत्व किस तापमान पर होता है?", opts: ["0°C", "4°C", "10°C", "100°C"], ans: "B" }
+    ];
+
+    let currentIdx = 0;
+    let currentSec = 0;
+    const userAnswers = new Array(100).fill(null);
+    const statusMap = new Array(100).fill("not-answered");
+    let totalSecs = 90 * 60; // 90 minutes
+    let timerInt = null;
+    let candData = { name: "", roll: "" };
+
+    const VALID_PIN = "3202785400020";
+
+    function validateLogin() {
+      const name = document.getElementById("candInputName").value.trim();
+      const roll = document.getElementById("candInputRoll").value.trim();
+
+      if (!name) {
+        alert("Please enter Candidate Full Name.");
+        return;
+      }
+      if (roll !== VALID_PIN) {
+        alert("Invalid Roll No / Hall Ticket No! Please enter a valid Roll Number to proceed.");
+        return;
+      }
+
+      candData.name = name;
+      candData.roll = roll;
+
+      // Update Header with Entered Student Credentials
+      document.getElementById("hdrName").innerText = name;
+      document.getElementById("hdrRoll").innerText = roll;
+      document.getElementById("headerCandidateMeta").classList.remove("hidden");
+
+      document.getElementById("loginScreen").classList.add("hidden");
+      document.getElementById("instructionsScreen").classList.remove("hidden");
+    }
+
+    function startTest() {
+      document.getElementById("instructionsScreen").classList.add("hidden");
+      document.getElementById("examWorkspace").classList.remove("hidden");
+
+      initPaletteGrid();
+      loadQuestion(0);
+      startCountTimer();
+    }
+
+    function initPaletteGrid() {
+      const pGrid = document.getElementById("paletteGrid");
+      pGrid.innerHTML = "";
+      for (let i = 0; i < 100; i++) {
+        const btn = document.createElement("button");
+        btn.id = `pal_btn_${i}`;
+        btn.className = "p-btn not-answered";
+        btn.innerText = i + 1;
+        btn.onclick = () => jumpToQuestion(i);
+        pGrid.appendChild(btn);
+      }
+      updateSectionCounters();
+    }
+
+    function loadQuestion(idx) {
+      currentIdx = idx;
+      const q = questions[idx];
+
+      if (q.sec !== currentSec) {
+        switchSection(q.sec, false);
+      }
+
+      document.getElementById("displayQNum").innerText = `Question No. ${idx + 1} / 100`;
+      document.getElementById("qTextEn").innerText = `${idx + 1}. ${q.en}`;
+      document.getElementById("qTextHi").innerText = q.hi;
+
+      const optsBox = document.getElementById("optionsBox");
+      optsBox.innerHTML = "";
+
+      const keys = ["A", "B", "C", "D"];
+      q.opts.forEach((opt, oIdx) => {
+        const key = keys[oIdx];
+        const isChecked = userAnswers[idx] === key ? "checked" : "";
+        optsBox.innerHTML += `
+          <label class="opt-item">
+            <input type="radio" name="optRadio" value="${key}" ${isChecked} onchange="selectOption('${key}')">
+            <span><strong>(${key})</strong> ${opt}</span>
+          </label>
+        `;
+      });
+
+      refreshPaletteView();
+    }
+
+    function selectOption(key) {
+      userAnswers[currentIdx] = key;
+    }
+
+    function saveNext() {
+      if (userAnswers[currentIdx]) {
+        statusMap[currentIdx] = "answered";
+      } else {
+        statusMap[currentIdx] = "not-answered";
+      }
+      refreshPaletteView();
+      if (currentIdx < 99) loadQuestion(currentIdx + 1);
+    }
+
+    function markReview() {
+      if (userAnswers[currentIdx]) {
+        statusMap[currentIdx] = "review-ans";
+      } else {
+        statusMap[currentIdx] = "review";
+      }
+      refreshPaletteView();
+      if (currentIdx < 99) loadQuestion(currentIdx + 1);
+    }
+
+    function clearResp() {
+      userAnswers[currentIdx] = null;
+      statusMap[currentIdx] = "not-answered";
+      const radios = document.getElementsByName("optRadio");
+      radios.forEach(r => r.checked = false);
+      refreshPaletteView();
+    }
+
+    function prevQ() {
+      if (currentIdx > 0) loadQuestion(currentIdx - 1);
+    }
+
+    function jumpToQuestion(idx) {
+      loadQuestion(idx);
+    }
+
+    function refreshPaletteView() {
+      for (let i = 0; i < 100; i++) {
+        const btn = document.getElementById(`pal_btn_${i}`);
+        btn.className = "p-btn";
+        if (i === currentIdx) {
+          btn.classList.add("current");
+        } else {
+          btn.classList.add(statusMap[i]);
+        }
+      }
+      updateSectionCounters();
+    }
+
+    function switchSection(secIdx, loadFirst = true) {
+      currentSec = secIdx;
+      for (let s = 0; s < 4; s++) {
+        const tab = document.getElementById(`tab_${s}`);
+        const cnt = document.getElementById(`secCounter_${s}`);
+        if (s === secIdx) {
+          tab.classList.add("active");
+          cnt.classList.add("active");
+        } else {
+          tab.classList.remove("active");
+          cnt.classList.remove("active");
+        }
+      }
+
+      if (loadFirst) {
+        const targetQ = questions.findIndex(q => q.sec === secIdx);
+        if (targetQ !== -1) loadQuestion(targetQ);
+      }
+    }
+
+    function updateSectionCounters() {
+      const counts = [0, 0, 0, 0];
+      const totals = [40, 30, 20, 10];
+      for (let i = 0; i < 100; i++) {
+        if (userAnswers[i] !== null) {
+          counts[questions[i].sec]++;
+        }
+      }
+      for (let s = 0; s < 4; s++) {
+        document.getElementById(`secCountVal_${s}`).innerText = `${counts[s]} / ${totals[s]}`;
+      }
+    }
+
+    function startCountTimer() {
+      if (timerInt) clearInterval(timerInt);
+      timerInt = setInterval(() => {
+        totalSecs--;
+        if (totalSecs <= 0) {
+          clearInterval(timerInt);
+          alert("Time's up! Automatically submitting examination.");
+          processFinalSubmission();
+          return;
+        }
+        let mins = Math.floor(totalSecs / 60);
+        let secs = totalSecs % 60;
+        document.getElementById("timerClock").innerText = 
+          `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    function openSubmitModal() {
+      document.getElementById("submitPromptModal").classList.remove("hidden");
+    }
+
+    function closeSubmitModal() {
+      document.getElementById("submitPromptModal").classList.add("hidden");
+    }
+
+    function getExamDateTime() {
+      const now = new Date();
+      const day = String(now.getDate()).padStart(2, '0');
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const year = now.getFullYear();
+
+      const elapsedSeconds = (90 * 60) - totalSecs;
+      const startSlotMinutes = 14 * 60; // 2:00 PM
+      const totalSlotMinutes = startSlotMinutes + Math.floor(elapsedSeconds / 60);
+      const slotSeconds = elapsedSeconds % 60;
+
+      let hours = Math.floor(totalSlotMinutes / 60);
+      const minutes = totalSlotMinutes % 60;
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+
+      const timeStr = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(slotSeconds).padStart(2, '0')} ${ampm}`;
+      return `${day}/${month}/${year}, ${timeStr}`;
+    }
+
+    function processFinalSubmission() {
+      closeSubmitModal();
+      document.getElementById("submittingLoaderModal").classList.remove("hidden");
+
+      setTimeout(() => {
+        document.getElementById("submittingLoaderModal").classList.add("hidden");
+        clearInterval(timerInt);
+
+        const attempted = userAnswers.filter(a => a !== null).length;
+        document.getElementById("resName").innerText = candData.name;
+        document.getElementById("resRoll").innerText = candData.roll;
+        document.getElementById("resAttempted").innerText = attempted;
+        document.getElementById("resDateTime").innerText = getExamDateTime();
+
+        document.getElementById("finalSuccessModal").classList.remove("hidden");
+      }, 1800);
+    }
+  </script>
+</body>
+</html>
