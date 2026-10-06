@@ -16,7 +16,7 @@
       --orange: #f59e0b;
       --purple: #8b5cf6;
       --grey: #f1f5f9;
-      --blue: #3b82f6;
+      --blue: #0284c7;
     }
 
     * {
@@ -360,7 +360,7 @@
 
     .modal-box {
       background: #ffffff;
-      border-radius: 8px;
+      border-radius: 6px;
       max-width: 480px;
       width: 100%;
       overflow: hidden;
@@ -423,11 +423,11 @@
         <p class="sub-post">Commercial Clerk Group - C</p>
       </div>
     </div>
-    <!-- Hidden before student login -->
+    <!-- Hidden before login -->
     <div class="candidate-meta hidden" id="headerCandidateMeta">
       <div class="cand-details">
         <div>Candidate Name: <strong id="hdrName">Tejas Mahendra Sonawane</strong></div>
-        <div>Roll Number: <strong id="hdrRoll">02092003</strong></div>
+        <div>Roll Number: <strong id="hdrRoll">02****03</strong></div>
         <div>Registration Number: <strong id="hdrReg">471177139178</strong></div>
       </div>
       <div class="timer-wrap">
@@ -440,29 +440,29 @@
   <!-- Login Modal -->
   <div id="loginScreen" class="modal-backdrop">
     <div class="modal-box" style="max-width: 440px;">
-      <div class="modal-blue-header">RRB NTPC Candidate Verification</div>
+      <div class="modal-blue-header">RRB NTPC Candidate Verification / उम्मीदवार सत्यापन</div>
       <div style="padding: 20px;">
-        <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 14px;">Enter candidate credentials to start your examination:</p>
+        <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 14px;">Enter candidate credentials to start your examination:<br><span style="font-size:0.8rem; color:#475569;">परीक्षा शुरू करने के लिए उम्मीदवार का विवरण दर्ज करें:</span></p>
         <div style="margin-bottom: 12px;">
-          <label style="display:block; font-size: 0.8rem; font-weight:600; margin-bottom: 4px;">Candidate Full Name:</label>
+          <label style="display:block; font-size: 0.8rem; font-weight:600; margin-bottom: 4px;">Candidate Full Name / उम्मीदवार का पूरा नाम:</label>
           <input type="text" id="candInputName" value="" style="width:100%; padding:9px; border:1px solid #cbd5e1; border-radius:4px;" placeholder="Enter Candidate Full Name" required>
         </div>
         <div style="margin-bottom: 18px;">
-          <label style="display:block; font-size: 0.8rem; font-weight:600; margin-bottom: 4px;">Password / Roll Number:</label>
+          <label style="display:block; font-size: 0.8rem; font-weight:600; margin-bottom: 4px;">Password / Roll Number / पासवर्ड या रोल नंबर:</label>
           <input type="password" id="candInputPass" style="width:100%; padding:9px; border:1px solid #cbd5e1; border-radius:4px;" placeholder="Enter Password" required>
         </div>
-        <button class="btn btn-blue" style="width:100%; padding: 10px;" onclick="validateLogin()">Login to Test</button>
+        <button class="btn btn-blue" style="width:100%; padding: 10px;" onclick="validateLogin()">Login to Test / लॉगिन करें</button>
       </div>
     </div>
   </div>
 
-  <!-- Instructions Modal (Updated 04:30 PM to 06:00 PM) -->
+  <!-- Instructions Modal (Bilingual) -->
   <div id="instructionsScreen" class="modal-backdrop hidden">
     <div class="modal-box" style="max-width: 760px;">
       <div class="modal-blue-header">Instructions & Undertaking / उम्मीदवारों के लिए निर्देश</div>
       <div style="padding: 20px; max-height: 420px; overflow-y:auto; font-size: 0.88rem; line-height: 1.6;">
         <div style="background: #e0f2fe; border-left: 4px solid #0284c7; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px;">
-          <strong>Candidate: <span id="instName">--</span> | Reg No: 471177139178 | Roll No: 02092003</strong><br>
+          <strong>Candidate / उम्मीदवार: <span id="instName">--</span> | Reg No: 471177139178 | Roll No: 02****03</strong><br>
           <span style="font-size: 0.82rem; color: #0369a1;">Total Duration / कुल अवधि: 90 Minutes (04:30 PM to 06:00 PM) | Total Marks / कुल अंक: 100</span>
         </div>
         <h4 style="color:#0284c7; margin-bottom: 10px;">Important Guidelines / महत्वपूर्ण दिशानिर्देश:</h4>
@@ -490,7 +490,7 @@
         </ol>
       </div>
       <div class="modal-footer-actions">
-        <button class="btn btn-blue" onclick="startTest()">I have read all instructions • Start Exam</button>
+        <button class="btn btn-blue" onclick="startTest()">I have read all instructions • Start Exam / परीक्षा शुरू करें</button>
       </div>
     </div>
   </div>
@@ -520,27 +520,27 @@
 
         <div class="q-footer-bar">
           <div style="display: flex; gap: 8px;">
-            <button class="btn" onclick="prevQ()">&lt; Previous</button>
-            <button class="btn" onclick="markReview()">Mark for Review & Next</button>
-            <button class="btn" onclick="clearResp()">Clear Response</button>
+            <button class="btn" onclick="prevQ()">&lt; Previous / पिछला</button>
+            <button class="btn" onclick="markReview()">Mark for Review & Next / समीक्षा के लिए चिह्नित करें</button>
+            <button class="btn" onclick="clearResp()">Clear Response / उत्तर हटाएं</button>
           </div>
           <div>
-            <button class="btn btn-blue" onclick="saveNext()">Save & Next &gt;</button>
+            <button class="btn btn-blue" onclick="saveNext()">Save & Next &gt; / सहेजें और आगे बढ़ें</button>
           </div>
         </div>
       </section>
 
       <aside class="palette-side">
-        <div class="side-title">Question Palette</div>
+        <div class="side-title">Question Palette / प्रश्न तालिका</div>
         
         <div class="palette-grid" id="paletteGrid"></div>
 
         <div class="legend-box">
-          <div class="legend-row"><span class="legend-dot" style="background:var(--green)"></span> Answered</div>
-          <div class="legend-row"><span class="legend-dot" style="background:var(--orange)"></span> Marked for Review</div>
-          <div class="legend-row"><span class="legend-dot" style="background:var(--purple)"></span> Answered & Marked for Review</div>
-          <div class="legend-row"><span class="legend-dot" style="background:#fee2e2"></span> Not Answered</div>
-          <div class="legend-row"><span class="legend-dot" style="background:#e0f2fe"></span> Current Question</div>
+          <div class="legend-row"><span class="legend-dot" style="background:var(--green)"></span> Answered / उत्तर दिया</div>
+          <div class="legend-row"><span class="legend-dot" style="background:var(--orange)"></span> Marked for Review / समीक्षा के लिए चिह्नित</div>
+          <div class="legend-row"><span class="legend-dot" style="background:var(--purple)"></span> Answered & Review / उत्तरित व समीक्षा हेतु</div>
+          <div class="legend-row"><span class="legend-dot" style="background:#fee2e2"></span> Not Answered / उत्तर नहीं दिया</div>
+          <div class="legend-row"><span class="legend-dot" style="background:#e0f2fe"></span> Current Question / वर्तमान प्रश्न</div>
         </div>
 
         <div class="section-counter-list">
@@ -563,7 +563,7 @@
         </div>
 
         <div class="submit-block">
-          <button class="btn-submit-main" onclick="openSubmitModal()">Submit Test</button>
+          <button class="btn-submit-main" onclick="openSubmitModal()">Submit Test / परीक्षा जमा करें</button>
         </div>
       </aside>
     </div>
@@ -573,17 +573,17 @@
   <div id="submitPromptModal" class="modal-backdrop hidden">
     <div class="modal-box">
       <div class="modal-blue-header">
-        <span>Submit Test</span>
+        <span>Submit Test / परीक्षा जमा करें</span>
         <span style="cursor:pointer;" onclick="closeSubmitModal()">&times;</span>
       </div>
       <div class="modal-body-content">
         <div style="width: 52px; height: 52px; border-radius: 50%; background: #0284c7; color:#fff; font-size: 2rem; display: flex; align-items:center; justify-content:center; margin: 0 auto 12px auto;">?</div>
-        <h3 style="color:#0f172a; margin-bottom: 8px;">Are you sure you want to submit the test?</h3>
-        <p style="color:#64748b; font-size: 0.88rem;">You will not be able to change your answers after submitting the test.</p>
+        <h3 style="color:#0f172a; margin-bottom: 8px;">Are you sure you want to submit the test?<br><span style="font-size:0.95rem; font-weight:500; color:#475569;">क्या आप वाकई परीक्षा जमा करना चाहते हैं?</span></h3>
+        <p style="color:#64748b; font-size: 0.85rem;">You will not be able to change your answers after submitting the test.<br>परीक्षा जमा करने के बाद आप अपने उत्तरों में बदलाव नहीं कर सकेंगे।</p>
       </div>
       <div class="modal-footer-actions">
-        <button class="btn" onclick="closeSubmitModal()">Cancel</button>
-        <button class="btn btn-blue" onclick="processFinalSubmission()">Submit</button>
+        <button class="btn" onclick="closeSubmitModal()">Cancel / रद्द करें</button>
+        <button class="btn btn-blue" onclick="processFinalSubmission()">Submit / जमा करें</button>
       </div>
     </div>
   </div>
@@ -597,27 +597,27 @@
     </div>
   </div>
 
-  <!-- Final Submitted Successfully Screen (Exact replica of user's photo) -->
+  <!-- Final Submitted Successfully Screen (Clean design matching user's reference photo) -->
   <div id="finalSuccessModal" class="modal-backdrop hidden">
-    <div class="modal-box" style="max-width: 560px; border-radius: 6px;">
-      <div class="modal-body-content" style="text-align: left; padding: 36px 32px 30px 32px;">
+    <div class="modal-box" style="max-width: 540px; border-radius: 6px;">
+      <div class="modal-body-content" style="text-align: left; padding: 38px 34px 30px 34px;">
         <div style="text-align: center; margin-bottom: 22px;">
           <div style="width: 58px; height: 58px; border-radius: 50%; background: #22c55e; color:#fff; font-size: 2.2rem; display: flex; align-items:center; justify-content:center; margin: 0 auto 12px auto;">&#10004;</div>
           <h2 style="color:#1e293b; font-size: 1.45rem; font-weight: 700; margin-bottom: 6px;">Test Submitted Successfully!</h2>
-          <p style="color:#64748b; font-size: 0.9rem; line-height: 1.4;">Thank you for appearing in the RRB NTPC CBT.<br>Your test has been submitted successfully.</p>
+          <p style="color:#64748b; font-size: 0.88rem; line-height: 1.45;">Thank you for appearing in the RRB NTPC CBT.<br>Your test has been submitted successfully.</p>
         </div>
 
-        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 18px 20px; font-size: 0.88rem; line-height: 1.9;">
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 18px 20px; font-size: 0.88rem; line-height: 1.95;">
           <div style="display:flex; justify-content:space-between;"><span>Exam Name</span><span>: <strong>RRB NTPC (Commercial Clerk Group - C)</strong></span></div>
           <div style="display:flex; justify-content:space-between;"><span>Candidate Name</span><span>: <strong id="resName">Tejas Mahendra Sonawane</strong></span></div>
-          <div style="display:flex; justify-content:space-between;"><span>Roll Number</span><span>: <strong id="resRoll">02092003</strong></span></div>
+          <div style="display:flex; justify-content:space-between;"><span>Roll Number</span><span>: <strong id="resRoll">02****03</strong></span></div>
           <div style="display:flex; justify-content:space-between;"><span>Registration Number</span><span>: <strong id="resReg">471177139178</strong></span></div>
           <div style="display:flex; justify-content:space-between;"><span>Date & Time</span><span>: <strong id="resDateTime">--</strong></span></div>
           <div style="display:flex; justify-content:space-between;"><span>Total Attempted</span><span>: <strong id="resAttempted">--</strong> / 100</span></div>
         </div>
 
         <div style="text-align: center; margin-top: 24px;">
-          <button class="btn btn-blue" style="padding: 9px 44px; font-size: 0.9rem;" onclick="window.location.reload()">Close</button>
+          <button class="btn btn-blue" style="padding: 9px 46px; font-size: 0.9rem;" onclick="window.location.reload()">Close</button>
         </div>
       </div>
     </div>
@@ -752,7 +752,8 @@
 
     const REGISTRATION_NO = "471177139178";
     const REQUIRED_PASS = "02092003";
-    let enteredCandidateName = "";
+    const MASKED_ROLL = "02****03";
+    let enteredCandidateName = "Tejas Mahendra Sonawane";
 
     function validateLogin() {
       const name = document.getElementById("candInputName").value.trim();
@@ -770,7 +771,7 @@
       enteredCandidateName = name;
 
       document.getElementById("hdrName").innerText = enteredCandidateName;
-      document.getElementById("hdrRoll").innerText = REQUIRED_PASS;
+      document.getElementById("hdrRoll").innerText = MASKED_ROLL;
       document.getElementById("hdrReg").innerText = REGISTRATION_NO;
       document.getElementById("headerCandidateMeta").classList.remove("hidden");
 
@@ -945,7 +946,6 @@
       document.getElementById("submitPromptModal").classList.add("hidden");
     }
 
-    // Dynamic Date & Time based on current date and 04:30 PM slot onwards
     function getExamDateTime() {
       const now = new Date();
       const day = String(now.getDate()).padStart(2, '0');
@@ -977,7 +977,7 @@
 
         const attempted = userAnswers.filter(a => a !== null).length;
         document.getElementById("resName").innerText = enteredCandidateName;
-        document.getElementById("resRoll").innerText = REQUIRED_PASS;
+        document.getElementById("resRoll").innerText = MASKED_ROLL;
         document.getElementById("resReg").innerText = REGISTRATION_NO;
         document.getElementById("resAttempted").innerText = attempted;
         document.getElementById("resDateTime").innerText = getExamDateTime();
