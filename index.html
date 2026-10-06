@@ -426,9 +426,9 @@
     <!-- Hidden before student login -->
     <div class="candidate-meta hidden" id="headerCandidateMeta">
       <div class="cand-details">
-        <div>Candidate Name: <strong id="hdrName">--</strong></div>
-        <div>Roll Number: <strong id="hdrRoll">--</strong></div>
-        <div>Registration Number: <strong>240098172</strong></div>
+        <div>Candidate Name: <strong id="hdrName">Tejas Mahendra Sonawane</strong></div>
+        <div>Roll Number: <strong id="hdrRoll">02****03</strong></div>
+        <div>Registration Number: <strong id="hdrReg">471177139178</strong></div>
       </div>
       <div class="timer-wrap">
         <span style="font-size: 0.72rem; color: #94a3b8;">Time Left</span>
@@ -442,35 +442,35 @@
     <div class="modal-box" style="max-width: 440px;">
       <div class="modal-blue-header">RRB NTPC Candidate Verification</div>
       <div style="padding: 20px;">
-        <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 14px;">Enter candidate details to start your examination:</p>
+        <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 14px;">Enter candidate credentials to start your examination:</p>
         <div style="margin-bottom: 12px;">
           <label style="display:block; font-size: 0.8rem; font-weight:600; margin-bottom: 4px;">Candidate Full Name:</label>
-          <input type="text" id="candInputName" style="width:100%; padding:9px; border:1px solid #cbd5e1; border-radius:4px;" placeholder="Enter Candidate Full Name" required>
+          <input type="text" id="candInputName" value="Tejas Mahendra Sonawane" style="width:100%; padding:9px; border:1px solid #cbd5e1; border-radius:4px;" placeholder="Enter Candidate Full Name" required>
         </div>
         <div style="margin-bottom: 18px;">
-          <label style="display:block; font-size: 0.8rem; font-weight:600; margin-bottom: 4px;">Roll No / Hall Ticket No:</label>
-          <input type="text" id="candInputRoll" style="width:100%; padding:9px; border:1px solid #cbd5e1; border-radius:4px;" placeholder="Enter Roll Number" required>
+          <label style="display:block; font-size: 0.8rem; font-weight:600; margin-bottom: 4px;">Password / Roll Number:</label>
+          <input type="password" id="candInputPass" style="width:100%; padding:9px; border:1px solid #cbd5e1; border-radius:4px;" placeholder="Enter Password" required>
         </div>
         <button class="btn btn-blue" style="width:100%; padding: 10px;" onclick="validateLogin()">Login to Test</button>
       </div>
     </div>
   </div>
 
-  <!-- Instructions Modal (Updated 6:00 PM Slot & 90 Minutes) -->
+  <!-- Instructions Modal -->
   <div id="instructionsScreen" class="modal-backdrop hidden">
     <div class="modal-box" style="max-width: 720px;">
       <div class="modal-blue-header">Instructions & Undertaking / उम्मीदवारों के लिए निर्देश</div>
       <div style="padding: 20px; max-height: 400px; overflow-y:auto; font-size: 0.88rem; line-height: 1.6;">
         <div style="background: #e0f2fe; border-left: 4px solid #0284c7; padding: 10px 14px; margin-bottom: 14px; border-radius: 4px;">
-          <strong>Total Duration / कुल अवधि: 90 Minutes (90 मिनट)</strong><br>
-          <span style="font-size: 0.82rem; color: #0369a1;">Post: Commercial Clerk Group - C | Slot: 06:00 PM to 07:30 PM | Maximum Marks: 100</span>
+          <strong>Candidate: Tejas Mahendra Sonawane | Reg No: 471177139178 | Roll No: 02****03</strong><br>
+          <span style="font-size: 0.82rem; color: #0369a1;">Total Duration / कुल अवधि: 90 Minutes (06:00 PM to 07:30 PM) | Total Marks: 100</span>
         </div>
         <h4 style="color:#0284c7; margin-bottom: 8px;">Important Guidelines / महत्वपूर्ण दिशानिर्देश:</h4>
         <ol style="padding-left: 20px;">
           <li>Total 100 questions of 1 mark each. Complete exam duration is <strong>90 minutes</strong>.<br><span style="color:#64748b;">कुल 100 प्रश्न हैं, प्रत्येक 1 अंक का है। परीक्षा की कुल अवधि 90 मिनट है।</span></li>
           <li>There is no negative marking for incorrect answers.<br><span style="color:#64748b;">गलत उत्तरों के लिए कोई नकारात्मक अंकन नहीं है।</span></li>
-          <li>Question paper contains 4 sections: General Awareness, Reasoning Ability, Numerical Ability, and General Science.<br><span style="color:#64748b;">प्रश्न पत्र में 4 खंड हैं: सामान्य जागरूकता, तर्कशक्ति, संख्यात्मक अभियोग्यता और सामान्य विज्ञान।</span></li>
-          <li>Clock will be set at the server. The countdown timer at the top right corner displays the remaining time.<br><span style="color:#64748b;">स्क्रीन के ऊपरी दाएं कोने में 90 मिनट का उल्टी गिनती टाइमर चलेगा। समय समाप्त होने पर पेपर स्वतः जमा हो जाएगा।</span></li>
+          <li>All 100 questions are randomized (shuffled) across 4 sections.</li>
+          <li>Screen countdown timer at the top right corner displays remaining time. Exam auto-submits at 00:00.</li>
           <li>Do not refresh or close the browser window during the test.</li>
         </ol>
       </div>
@@ -573,7 +573,7 @@
     </div>
   </div>
 
-  <!-- Submitting In-Progress Loader Modal -->
+  <!-- Submitting Loader Modal -->
   <div id="submittingLoaderModal" class="modal-backdrop hidden">
     <div class="modal-box" style="text-align: center; padding: 36px 20px;">
       <div class="loader-ring"></div>
@@ -594,9 +594,9 @@
 
         <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 16px; font-size: 0.88rem; line-height: 1.8;">
           <div style="display:flex; justify-content:space-between;"><span>Exam Name</span><span>: <strong>RRB NTPC (Commercial Clerk Group - C)</strong></span></div>
-          <div style="display:flex; justify-content:space-between;"><span>Candidate Name</span><span>: <strong id="resName">--</strong></span></div>
-          <div style="display:flex; justify-content:space-between;"><span>Roll Number</span><span>: <strong id="resRoll">--</strong></span></div>
-          <div style="display:flex; justify-content:space-between;"><span>Registration Number</span><span>: <strong>240098172</strong></span></div>
+          <div style="display:flex; justify-content:space-between;"><span>Candidate Name</span><span>: <strong id="resName">Tejas Mahendra Sonawane</strong></span></div>
+          <div style="display:flex; justify-content:space-between;"><span>Roll Number</span><span>: <strong id="resRoll">02****03</strong></span></div>
+          <div style="display:flex; justify-content:space-between;"><span>Registration Number</span><span>: <strong id="resReg">471177139178</strong></span></div>
           <div style="display:flex; justify-content:space-between;"><span>Date & Time</span><span>: <strong id="resDateTime">--</strong></span></div>
           <div style="display:flex; justify-content:space-between;"><span>Total Attempted</span><span>: <strong id="resAttempted">--</strong> / 100</span></div>
         </div>
@@ -609,7 +609,7 @@
   </div>
 
   <script>
-    const questions = [
+    const rawQuestions = [
       { id: 1, sec: 0, en: "The Indus valley people venerated the", hi: "सिंधु घाटी के लोगों ने किसकी वंदना की?", opts: ["Cow / गाय", "Bull / बैल", "Garuda / गरुड़", "None of the above / उपरोक्त में से कोई नहीं"], ans: "B" },
       { id: 2, sec: 0, en: "The paintings of Ajanta depict stories of the", hi: "अजंता के चित्र किसकी कहानियों को दर्शाते हैं?", opts: ["Jatakas / जातक", "Mahabharata / महाभारत", "Ramayana / रामायण", "None of the above / उपरोक्त में से कोई नहीं"], ans: "A" },
       { id: 3, sec: 0, en: "Who was the author of Gita Govinda?", hi: "गीत गोविंद के लेखक कौन थे?", opts: ["Vidyapati / विद्यापति", "Surdas / सूरदास", "Jayadeva / जयदेव", "None of the above / उपरोक्त में से कोई नहीं"], ans: "C" },
@@ -718,34 +718,48 @@
       { id: 100, sec: 3, en: "Water reaches its maximum density at:", hi: "जल का अधिकतम घनत्व किस तापमान पर होता है?", opts: ["0°C", "4°C", "10°C", "100°C"], ans: "B" }
     ];
 
+    // Fisher-Yates Random Shuffle for 100 Questions
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // Shuffled question bank
+    const questions = shuffleArray([...rawQuestions]);
+
     let currentIdx = 0;
     let currentSec = 0;
     const userAnswers = new Array(100).fill(null);
     const statusMap = new Array(100).fill("not-answered");
     let totalSecs = 90 * 60; // 90 minutes
     let timerInt = null;
-    let candData = { name: "", roll: "" };
 
-    const VALID_PIN = "3202785400020";
+    // Fixed credentials specified by user
+    const CANDIDATE_NAME = "Tejas Mahendra Sonawane";
+    const REGISTRATION_NO = "471177139178";
+    const REQUIRED_PASS = "02092003";
+    const MASKED_PASS = "02****03";
 
     function validateLogin() {
       const name = document.getElementById("candInputName").value.trim();
-      const roll = document.getElementById("candInputRoll").value.trim();
+      const pass = document.getElementById("candInputPass").value.trim();
 
       if (!name) {
         alert("Please enter Candidate Full Name.");
         return;
       }
-      if (roll !== VALID_PIN) {
-        alert("Invalid Roll No / Hall Ticket No! Please enter a valid Roll Number to proceed.");
+      if (pass !== REQUIRED_PASS) {
+        alert("Invalid Password / Roll Number! Please enter correct credentials.");
         return;
       }
 
-      candData.name = name;
-      candData.roll = roll;
-
-      document.getElementById("hdrName").innerText = name;
-      document.getElementById("hdrRoll").innerText = roll;
+      // Update Header with Entered Credentials and Masked Format
+      document.getElementById("hdrName").innerText = CANDIDATE_NAME;
+      document.getElementById("hdrRoll").innerText = MASKED_PASS;
+      document.getElementById("hdrReg").innerText = REGISTRATION_NO;
       document.getElementById("headerCandidateMeta").classList.remove("hidden");
 
       document.getElementById("loginScreen").classList.add("hidden");
@@ -880,8 +894,9 @@
 
     function updateSectionCounters() {
       const counts = [0, 0, 0, 0];
-      const totals = [40, 30, 20, 10];
+      const totals = [0, 0, 0, 0];
       for (let i = 0; i < 100; i++) {
+        totals[questions[i].sec]++;
         if (userAnswers[i] !== null) {
           counts[questions[i].sec]++;
         }
@@ -916,7 +931,6 @@
       document.getElementById("submitPromptModal").classList.add("hidden");
     }
 
-    // Format Current Date with Dynamic Submit Time from 6:00 PM Slot
     function getExamDateTime() {
       const now = new Date();
       const day = String(now.getDate()).padStart(2, '0');
@@ -924,7 +938,7 @@
       const year = now.getFullYear();
 
       const elapsedSeconds = (90 * 60) - totalSecs;
-      const startSlotMinutes = 18 * 60; // 6:00 PM (18:00)
+      const startSlotMinutes = 18 * 60; // 6:00 PM slot
       const totalSlotMinutes = startSlotMinutes + Math.floor(elapsedSeconds / 60);
       const slotSeconds = elapsedSeconds % 60;
 
@@ -947,8 +961,9 @@
         clearInterval(timerInt);
 
         const attempted = userAnswers.filter(a => a !== null).length;
-        document.getElementById("resName").innerText = candData.name;
-        document.getElementById("resRoll").innerText = candData.roll;
+        document.getElementById("resName").innerText = CANDIDATE_NAME;
+        document.getElementById("resRoll").innerText = MASKED_PASS;
+        document.getElementById("resReg").innerText = REGISTRATION_NO;
         document.getElementById("resAttempted").innerText = attempted;
         document.getElementById("resDateTime").innerText = getExamDateTime();
 
